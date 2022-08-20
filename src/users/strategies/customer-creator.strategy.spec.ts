@@ -33,7 +33,7 @@ describe('CustomerCreatorStrategy', () => {
       .spyOn(userService, 'countCustomers')
       .mockImplementation(() => Promise.resolve(1));
     const userCreated = {
-      userId: 'dummyid',
+      userId: '63011f0c193edf9fd4369911',
       email: 'test.customer@example.com',
       type: 'Customer',
       roles: [],
@@ -53,7 +53,7 @@ describe('CustomerCreatorStrategy', () => {
       .spyOn(userService, 'createCustomer')
       .mockImplementation(() => Promise.resolve());
     const userCreated = {
-      userId: 'dummyid',
+      userId: '63011f0c193edf9fd4369911',
       email: 'test.customer@example.com',
       type: 'Customer',
       roles: [],

@@ -3,6 +3,7 @@ import { UserCreatedDto } from '../dto/user-created.dto';
 import { EmployeeProfile } from '../schemas/profile.schema';
 import { UserService } from '../user.service';
 import { IUserCreator } from './user-creator.interface';
+import { Types } from 'mongoose';
 
 @Injectable()
 export class EmployeeCreatorStrategy implements IUserCreator {
@@ -22,7 +23,7 @@ export class EmployeeCreatorStrategy implements IUserCreator {
     }
 
     const employeeProfile = new EmployeeProfile();
-    employeeProfile.employeeId = userCreated.userId;
+    employeeProfile.employee_id = new Types.ObjectId(userCreated.userId);
     employeeProfile.email = userCreated.email;
     employeeProfile.roles = userCreated.roles;
 

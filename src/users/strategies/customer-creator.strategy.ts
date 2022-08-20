@@ -3,6 +3,7 @@ import { UserCreatedDto } from '../dto/user-created.dto';
 import { CustomerProfile } from '../schemas/profile.schema';
 import { UserService } from '../user.service';
 import { IUserCreator } from './user-creator.interface';
+import { Types } from 'mongoose';
 
 @Injectable()
 export class CustomerCreatorStrategy implements IUserCreator {
@@ -22,7 +23,7 @@ export class CustomerCreatorStrategy implements IUserCreator {
     }
 
     const customerProfile = new CustomerProfile();
-    customerProfile.customerId = userCreated.userId;
+    customerProfile.customer_id = new Types.ObjectId(userCreated.userId);
     customerProfile.email = userCreated.email;
 
     await this.customerProfileService.createCustomer(customerProfile);
