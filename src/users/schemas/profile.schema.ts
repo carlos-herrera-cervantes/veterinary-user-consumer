@@ -1,40 +1,37 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 import { Gender } from '../../enums/gender.enum';
 
 export type EmployeeProfileDocument = EmployeeProfile & Document;
 
 @Schema({ versionKey: false })
 export class EmployeeProfile {
-  @Prop({ name: '_id' })
-  id: string;
+  @Prop()
+  employee_id: Types.ObjectId;
 
-  @Prop({ name: 'employee_id' })
-  employeeId: string;
-
-  @Prop({ name: 'email' })
+  @Prop()
   email: string;
 
-  @Prop({ name: 'birthday', default: new Date() })
+  @Prop({ default: new Date() })
   birthday: Date;
 
-  @Prop({ name: 'gender', default: Gender.NotSpecified })
+  @Prop({ default: Gender.NotSpecified })
   gender: string;
 
-  @Prop({ name: 'name', default: null })
+  @Prop({ default: '' })
   name: string;
 
-  @Prop({ name: 'last_name', default: null })
-  lastName: string;
+  @Prop({ default: '' })
+  last_name: string;
 
-  @Prop({ name: 'roles' })
+  @Prop({ default: [] })
   roles: string[];
 
-  @Prop({ name: 'created_at', default: new Date() })
-  createdAt: Date;
+  @Prop({ default: new Date() })
+  created_at: Date;
 
-  @Prop({ name: 'updated_at', default: new Date() })
-  updatedAt: Date;
+  @Prop({ default: new Date() })
+  updated_at: Date;
 }
 
 export const EmployeeProfileSchema = SchemaFactory.createForClass(EmployeeProfile);
@@ -43,35 +40,32 @@ export type CustomerProfileDocument = CustomerProfile & Document
 
 @Schema({ versionKey: false })
 export class CustomerProfile {
-  @Prop({ name: '_id' })
-  id: string;
+  @Prop()
+  customer_id: Types.ObjectId;
 
-  @Prop({ name: 'customer_id' })
-  customerId: string;
-
-  @Prop({ name: 'email' })
+  @Prop()
   email: string;
 
-  @Prop({ name: 'birthday', default: new Date() })
+  @Prop({ default: new Date() })
   birthday: Date;
 
-  @Prop({ name: 'gender', default: Gender.NotSpecified })
+  @Prop({ default: Gender.NotSpecified })
   gender: string;
 
-  @Prop({ name: 'name', default: null })
+  @Prop({ default: '' })
   name: string;
 
-  @Prop({ name: 'last_name', default: null })
-  lastName: string;
+  @Prop({ default: '' })
+  last_name: string;
 
-  @Prop({ name: 'phone_number', default: null })
-  phoneNumber: string;
+  @Prop({ default: '' })
+  phone_number: string;
 
-  @Prop({ name: 'created_at', default: new Date() })
-  createdAt: Date;
+  @Prop({ default: new Date() })
+  created_at: Date;
 
-  @Prop({ name: 'updated_at', default: new Date() })
-  updatedAt: Date;
+  @Prop({ default: new Date() })
+  updated_at: Date;
 }
 
 export const CustomerProfileSchema = SchemaFactory.createForClass(CustomerProfile);
