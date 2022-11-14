@@ -12,7 +12,7 @@ export class EmployeeProfile {
   @Prop()
   email: string;
 
-  @Prop({ default: new Date() })
+  @Prop()
   birthday: Date;
 
   @Prop({ default: Gender.NotSpecified })
@@ -27,14 +27,20 @@ export class EmployeeProfile {
   @Prop({ default: [] })
   roles: string[];
 
-  @Prop({ default: new Date() })
+  @Prop()
   created_at: Date;
 
-  @Prop({ default: new Date() })
+  @Prop()
   updated_at: Date;
 }
 
 export const EmployeeProfileSchema = SchemaFactory.createForClass(EmployeeProfile);
+
+EmployeeProfileSchema.pre<EmployeeProfileDocument>('save', function () {
+  this.birthday = !this.birthday ? new Date() : this.birthday;
+  this.created_at = new Date();
+  this.updated_at = new Date();
+});
 
 export type CustomerProfileDocument = CustomerProfile & Document
 
@@ -46,7 +52,7 @@ export class CustomerProfile {
   @Prop()
   email: string;
 
-  @Prop({ default: new Date() })
+  @Prop()
   birthday: Date;
 
   @Prop({ default: Gender.NotSpecified })
@@ -61,11 +67,17 @@ export class CustomerProfile {
   @Prop({ default: '' })
   phone_number: string;
 
-  @Prop({ default: new Date() })
+  @Prop()
   created_at: Date;
 
-  @Prop({ default: new Date() })
+  @Prop()
   updated_at: Date;
 }
 
 export const CustomerProfileSchema = SchemaFactory.createForClass(CustomerProfile);
+
+CustomerProfileSchema.pre<CustomerProfileDocument>('save', function () {
+  this.birthday = !this.birthday ? new Date() : this.birthday;
+  this.created_at = new Date();
+  this.updated_at = new Date();
+});
