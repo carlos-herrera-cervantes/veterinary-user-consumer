@@ -31,4 +31,12 @@ export class UserService {
   async createCustomer(customerDto: CustomerProfile): Promise<void> {
     await this.customerProfileModel.create(customerDto);
   }
+
+  async deleteEmployees(filter?: FilterQuery<EmployeeProfileDocument>) {
+    await this.employeeProfileModel.deleteMany(filter);
+  }
+
+  async deleteCustomers(filter?: FilterQuery<CustomerProfileDocument>): Promise<void> {
+    await this.customerProfileModel.deleteMany(filter);
+  }
 }
