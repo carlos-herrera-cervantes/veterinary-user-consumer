@@ -4,3 +4,8 @@ export class UserCreatedDto {
   type: string;
   roles: string[];
 }
+
+export class UserUpdate {
+  employee_id: string;
+  roles: string[];
+}

@@ -42,7 +42,7 @@ EmployeeProfileSchema.pre<EmployeeProfileDocument>('save', function () {
   this.updated_at = new Date();
 });
 
-export type CustomerProfileDocument = CustomerProfile & Document
+export type CustomerProfileDocument = CustomerProfile & Document;
 
 @Schema({ versionKey: false })
 export class CustomerProfile {
@@ -81,3 +81,17 @@ CustomerProfileSchema.pre<CustomerProfileDocument>('save', function () {
   this.created_at = new Date();
   this.updated_at = new Date();
 });
+
+export type UserProfileDocument = UserProfile & Document;
+
+@Schema({ versionKey: false })
+export class UserProfile
+{
+  @Prop()
+  roles: string[];
+
+  @Prop()
+  updated_at: Date;
+}
+
+export const UserProfileSchema = SchemaFactory.createForClass(UserProfile);
