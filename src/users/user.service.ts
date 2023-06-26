@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model } from 'mongoose';
 import {
@@ -6,6 +6,8 @@ import {
   CustomerProfileDocument,
   EmployeeProfile,
   EmployeeProfileDocument,
+  UserProfile,
+  UserProfileDocument
 } from './schemas/profile.schema';
 
 @Injectable()
@@ -15,6 +17,15 @@ export class UserService {
 
   @InjectModel(CustomerProfile.name, 'customers')
   private readonly customerProfileModel: Model<CustomerProfileDocument>;
+
+  @InjectModel(UserProfile.name, 'authorizer')
+  private readonly userProfileModel: Model<UserProfileDocument>;
+
+  private readonly logger: Logger = new Logger(UserService.name);
+
+  async getUser(filter: FilterQuery<UserProfileDocument>): Promise<UserProfile> {
+    return this.userProfileModel.findOne(filter);
+  }
 
   async countEmployees(filter?: FilterQuery<EmployeeProfileDocument>): Promise<number> {
     return this.employeeProfileModel.countDocuments(filter);
@@ -30,6 +41,10 @@ export class UserService {
 
   async createCustomer(customerDto: CustomerProfile): Promise<void> {
     await this.customerProfileModel.create(customerDto);
+  }
+
+  async updateUser(filter: FilterQuery<UserProfileDocument>, userProfile: UserProfile): Promise<void> {
+    await this.userProfileModel.findOneAndUpdate(filter, { $set: userProfile }, { new: true });
   }
 
   async deleteEmployees(filter?: FilterQuery<EmployeeProfileDocument>) {

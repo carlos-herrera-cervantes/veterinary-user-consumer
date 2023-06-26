@@ -10,6 +10,9 @@ import { UserModule } from './users/user.module';
     MongooseModule.forRoot(process.env.CUSTOMER_DB, {
       connectionName: 'customers',
     }),
+    MongooseModule.forRoot(process.env.AUTHORIZER_DB, {
+      connectionName: 'authorizer',
+    }),
     UserModule,
   ],
 })
